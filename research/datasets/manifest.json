@@ -1,0 +1,44 @@
+{
+  "protocol": "phase7-revised-access-review-v1",
+  "reviewed_on": "2026-11-13",
+  "datasets_downloaded": [],
+  "models_downloaded_or_loaded": [],
+  "candidates": [
+    {
+      "name": "Lindvall Lab symptom-extraction-demo / Fareez simulated medical interviews",
+      "source": "https://github.com/lindvalllab/symptom-extraction-demo",
+      "upstream": "https://doi.org/10.1038/s41597-022-01423-1",
+      "provenance": "272 simulated OSCE-style conversations; 272 transcript files; predominantly respiratory; transcripts manually corrected.",
+      "annotations": "Demo README describes transcript labels for binary symptom presence or semicolon-separated symptom classes; no confirmed token-level span or duration/negation benchmark documented for that CSV.",
+      "license_access": "Paper is CC BY 4.0. Demo repository code is GPL-2.0. Exact license/terms for redistributed data files were not independently confirmed; verify Figshare item terms before using those files.",
+      "decision": "Not downloaded or used. Potentially useful for a simulation-only classifier after exact data rights and labels are verified; it does not support the requested span-attribute experiment as documented."
+    },
+    {
+      "name": "jfan1256/symptom-extraction",
+      "source": "https://github.com/jfan1256/symptom-extraction",
+      "provenance": "Repository states records and annotations derive from n2c2 clinical NLP data.",
+      "annotations": "Token-level symptom labels are documented by repository README.",
+      "license_access": "Repository code shows MIT license; this does not grant rights to the n2c2 records. Source dataset requires separate access conditions which were not established here.",
+      "decision": "Not downloaded or used pending confirmation of n2c2 access/data-use permissions."
+    },
+    {
+      "name": "IU X-Ray / Open-i",
+      "source": "https://openi.nlm.nih.gov/",
+      "provenance": "Open-i FAQ lists 7,470 Indiana University chest radiographs and 3,955 reports.",
+      "annotations": "Reports include Indication, Findings and Impression text; these are final reports, not separately recorded raw observations. Useful only for text-to-text report structuring evaluation with that limitation.",
+      "license_access": "Open-i says image reuse depends on the license shown for each image and requests that the dataset not be shared outside the research group. Uniform reuse terms for all reports were not verified.",
+      "decision": "Not downloaded; obtain and document per-item/report terms and a permitted split before evaluation."
+    }
+  ],
+  "model_candidates": [
+    {
+      "name": "StanfordAIMI/SRR-T5-SciFive",
+      "source": "https://huggingface.co/StanfordAIMI/SRR-T5-SciFive",
+      "task_suitability": "Model card describes structuring an already-written radiology report; it does not directly match raw radiologist observations to a generated report. Its example contains Findings and Impression in the input.",
+      "size": "0.2B parameters; listed safetensors weight approximately 892 MB in F32.",
+      "license_access": "No explicit model license was visible in the model card metadata inspected; verify with the publisher before use.",
+      "decision": "Not downloaded or loaded. No performance claim."
+    }
+  ],
+  "local_compute": "NVIDIA GeForce GTX 1650, 4 GiB VRAM detected. No model run."
+}
