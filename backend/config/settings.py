@@ -51,10 +51,17 @@ TEMPLATES = [{
 WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "config.asgi.application"
 
-if os.environ.get("DATABASE_URL"):
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if not DEBUG and not DATABASE_URL:
+    raise ImproperlyConfigured(
+        "Set DATABASE_URL to a PostgreSQL connection URL outside local debug mode."
+    )
+
+if DATABASE_URL:
     # Django's PostgreSQL settings are explicit to avoid a runtime URL parser dependency.
     import urllib.parse
-    db = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+    db = urllib.parse.urlparse(DATABASE_URL)
     DATABASES = {"default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": db.path.lstrip("/"), "USER": db.username or "",
@@ -102,3 +109,4 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
