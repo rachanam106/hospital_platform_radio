@@ -28,7 +28,6 @@ class Command(BaseCommand):
             # temporary bootstrap credentials have been removed.
             if clinics > 0:
                 owner_membership = Membership.objects.filter(
-                    clinic=clinic,
                     is_active=True,
                     role_grants__role=MembershipRole.Role.OWNER,
                     role_grants__is_active=True,
